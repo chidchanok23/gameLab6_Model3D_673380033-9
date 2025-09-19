@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://ds1y0s40ci3lu"]
+
+[ext_resource type="PackedScene" uid="uid://bxj676c8k46ca" path="res://assets/Trees.tscn" id="1_amuei"]
+[ext_resource type="Script" uid="uid://cmwosywg3l8cg" path="res://assets/demo.gd" id="1_e6to4"]
+[ext_resource type="PackedScene" uid="uid://b50ujqemciw7f" path="res://assets/Walking.tscn" id="4_137jn"]
+[ext_resource type="PackedScene" uid="uid://bsft05ebwkmov" path="res://assets/Running Backward.tscn" id="5_uskw3"]
+[ext_resource type="PackedScene" uid="uid://bmm8w3lnm2igr" path="res://assets/Falling Back Death.tscn" id="6_3xmef"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_457xp"]
+size = Vector3(467.482, 23.1248, 544.792)
+
+[sub_resource type="Environment" id="Environment_137jn"]
+background_color = Color(0.541176, 0.8, 0.8, 1)
+background_canvas_max_layer = 5
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_e6to4")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="Trees" parent="Ground" instance=ExtResource("1_amuei")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.83098, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.8798, 11.2474, 0.293182)
+shape = SubResource("BoxShape3D_457xp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707164, 0.121891, 0.696463, -0.681267, -0.146106, 0.717306, 0.18919, -0.981731, -0.0202809, -125.12, -28.0649, 0)
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(0.888875, -0.456084, -0.0434522, 0.456982, 0.875846, 0.155116, -0.0326884, -0.157736, 0.98694, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(0.0909764, 0.364214, 0.926861, 0.176941, 0.91, -0.374957, -0.980008, 0.198112, 0.0183442, 417.034, 2.35942, 37.3683)
+
+[node name="Walking" parent="." instance=ExtResource("4_137jn")]
+transform = Transform3D(3.03981, 0, 24.8145, 0, 25, 0, -24.8145, 0, 3.03981, 98.0714, 22.0318, -101.257)
+
+[node name="Running Backward" parent="." instance=ExtResource("5_uskw3")]
+transform = Transform3D(-3.48235, 0, 24.7563, 0, 25, 0, -24.7563, 0, -3.48235, 45.6434, 25.1664, 114.54)
+
+[node name="Falling Back Death" parent="." instance=ExtResource("6_3xmef")]
+transform = Transform3D(13.7449, 0, 20.8825, 0, 25, 0, -20.8825, 0, 13.7449, 152.574, 26.4199, 26.0676)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_137jn")
